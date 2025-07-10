@@ -4,6 +4,8 @@
 Player::Player()
 	: m_position{ 0.0f, 0.0f }
 	, m_angleRad{ 0.0f }
+	, m_velocity{ 0.0f, 0.0f }
+	, m_acceleration{ 0.0f, 0.0f }
 {
 }
 
@@ -25,6 +27,38 @@ void Player::Update(int keyCondition, int keyTrigger)
 	{
 		m_angleRad -= ToRadians(4.0f);
 	}
+
+	// 加速度をリセットする
+	m_acceleration = Vector2D{ 0.0f, 0.0f };
+
+	// 上キーが押されたら
+	if (keyCondition & PAD_INPUT_UP)
+	{
+		Vector2D v{ cosf(-m_angleRad), sinf(-m_angleRad) };
+		m_acceleration = v * MOVE_ACCELERATION;
+	}
+
+	// 下キーが押されたら
+	if (keyCondition & PAD_INPUT_DOWN)
+	{
+		Vector2D v{ cosf(-m_angleRad), sinf(-m_angleRad) };
+		m_acceleration = v * -MOVE_ACCELERATION;
+	}
+
+	// 速度に加速度を足す
+	m_velocity += m_acceleration;
+
+	// 位置に速度を足す
+	m_position += m_velocity;
+
+	// 摩擦係数を掛けて速度を落とす
+	m_velocity *= 0.99f;
+
+	// 画面外に出ないようにする
+	if (m_position.x < 0.0f) m_position.x = 0.0f;
+	if (m_position.x > Screen::GAME_WIDTH) m_position.x = Screen::GAME_WIDTH;
+	if (m_position.y < 0.0f) m_position.y = 0.0f;
+	if (m_position.y > Screen::GAME_HEIGHT) m_position.y = Screen::GAME_HEIGHT;
 }
 
 void Player::Render(int ghPlayer)

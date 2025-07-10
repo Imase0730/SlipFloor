@@ -5,6 +5,12 @@
 // プレイヤークラス
 class Player
 {
+	// 定数宣言 -----------------------------------------
+private:
+
+	// 移動時の加速度
+	static constexpr float MOVE_ACCELERATION = 0.1f;
+
 	// メンバ変数 ---------------------------------------
 private:
 
@@ -13,6 +19,12 @@ private:
 
 	// 向き
 	float m_angleRad;
+
+	// 速度
+	Vector2D m_velocity;
+
+	// 加速度
+	Vector2D m_acceleration;
 
 	// メンバ関数 ---------------------------------------
 public:
