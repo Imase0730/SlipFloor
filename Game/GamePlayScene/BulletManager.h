@@ -27,19 +27,19 @@ public:
 	~BulletManager();
 
 	// ‰Šú‰»ˆ—
-	void Initialize(Bullet::Type type, int BulletCount);
+	void Initialize(int BulletCount);
 
 	// XVˆ—
 	void Update();
 
 	// •`‰æˆ—
-	void Render(int ghShootingGame);
+	void Render(int ghBullet);
 
 	// I—¹ˆ—
 	void Finalize();
 
 	// ’e‚ğ”­Ë‚·‚éŠÖ”
-	void ShootBullet(POINT point);
+	void ShootBullet(Vector2D position, float angleRad);
 
 	// ŠÇ—‚µ‚Ä‚¢‚é’e‚ğæ“¾‚·‚éŠÖ”
 	Bullet* GetBullet(int index);

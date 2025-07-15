@@ -5,7 +5,7 @@
 #pragma once
 
 #include "Player.h"
-#include "Bullet.h"
+#include "BulletManager.h"
 
 // クラスの前方宣言
 class Game;
@@ -36,8 +36,8 @@ private:
 	// プレイヤー
 	Player m_player;
 
-	// 弾
-	Bullet m_bullet;
+	// プレイヤーの弾のマネージャー
+	BulletManager m_playerBulletManager;
 
 	// メンバ関数の宣言 -------------------------------------------------
 public:

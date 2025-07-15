@@ -16,7 +16,7 @@ BulletManager::~BulletManager()
 }
 
 // ‰Šú‰»ˆ—
-void BulletManager::Initialize(Bullet::Type type, int bulletCount)
+void BulletManager::Initialize(int bulletCount)
 {
 	// ŠÇ—‚·‚é’e‚Ì”
 	m_bulletCount = bulletCount;
@@ -26,12 +26,6 @@ void BulletManager::Initialize(Bullet::Type type, int bulletCount)
 
 	// ’e‚Ì”•ªƒƒ‚ƒŠ‚ğŠm•Û‚·‚é
 	m_pBullet = new Bullet[bulletCount];
-
-	// ’e‚Ìƒ^ƒCƒv‚ğİ’è‚·‚é
-	for (int i = 0; i < bulletCount; i++)
-	{
-		m_pBullet[i].SetType(type);
-	}
 }
 
 // XVˆ—
@@ -62,7 +56,7 @@ void BulletManager::Finalize()
 }
 
 // ’e‚ğ”­Ë‚·‚éŠÖ”
-void BulletManager::ShootBullet(POINT position)
+void BulletManager::ShootBullet(Vector2D position, float angleRad)
 {
 	for (int i = 0; i < m_bulletCount; i++)
 	{
@@ -70,7 +64,7 @@ void BulletManager::ShootBullet(POINT position)
 		if (!m_pBullet[i].IsActive())
 		{
 			// ’e‚ğ”­Ë‚·‚é
-			m_pBullet[i].Shoot(position);
+			m_pBullet[i].Shoot(position, angleRad);
 			return;
 		}
 	}

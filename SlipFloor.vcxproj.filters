@@ -90,6 +90,9 @@
     <ClCompile Include="Game\GamePlayScene\Bullet.cpp">
       <Filter>Game\GamePlayScene</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GamePlayScene\BulletManager.cpp">
+      <Filter>Game\GamePlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\GamePlayScene\GamePlayScene.h">
@@ -102,6 +105,9 @@
       <Filter>Game\GamePlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Game\GamePlayScene\Bullet.h">
+      <Filter>Game\GamePlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GamePlayScene\BulletManager.h">
       <Filter>Game\GamePlayScene</Filter>
     </ClInclude>
   </ItemGroup>

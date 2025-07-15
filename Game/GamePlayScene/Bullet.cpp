@@ -9,21 +9,21 @@ Bullet::Bullet()
 {
 }
 
-// デストラクタ
-Bullet::~Bullet()
-{
-}
-
-// 初期化関数
-void Bullet::Initialize()
-{
-}
-
 // 更新関数
 void Bullet::Update()
 {
 	// 位置に速度を足す
 	m_position += m_velocity;
+
+	// 画面外へ移動したら非アクティブにする
+	if ( (m_position.x < -BULLET_SIZE)
+	  || (m_position.x > Screen::GAME_WIDTH + BULLET_SIZE)
+	  || (m_position.y < -BULLET_SIZE)
+	  || (m_position.y > Screen::GAME_HEIGHT + BULLET_SIZE)
+	   )
+	{
+		m_isActive = false;
+	}
 }
 
 // 描画関数
@@ -35,8 +35,15 @@ void Bullet::Render(int ghBullet)
 }
 
 // 弾を発射する関数
-void Bullet::Shoot(Vector2D position)
+void Bullet::Shoot(Vector2D position, float angleRad)
 {
 	// アクティブにする
 	m_isActive = true;
+
+	// 位置を設定する
+	m_position = position;
+
+	// 速度を設定する
+	Vector2D v{ cosf(-angleRad), sinf(-angleRad) };
+	m_velocity = v * MOVE_SPEED;
 }

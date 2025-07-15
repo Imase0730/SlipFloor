@@ -11,6 +11,12 @@ public:
 	// クラス定数の宣言 -------------------------------------------------
 public:
 
+	// 弾の速さ
+	static constexpr float MOVE_SPEED = 5.0f;
+
+	// 弾の大きさ（８ドット）
+	static constexpr int BULLET_SIZE = 8;
+
 	// データメンバの宣言 -----------------------------------------------
 private:
 
@@ -29,12 +35,6 @@ public:
 	// コンストラクタ
 	Bullet();
 
-	// デストラクタ
-	~Bullet();
-
-	// 初期化関数
-	void Initialize();
-
 	// 更新関数
 	void Update();
 
@@ -45,6 +45,6 @@ public:
 	bool IsActive() const { return m_isActive; }
 
 	// 弾を発射する関数
-	void Shoot(Vector2D position);
+	void Shoot(Vector2D position, float angleRad);
 
 };

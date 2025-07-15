@@ -1,12 +1,16 @@
 #pragma once
 
 #include "Game/GameMath.h"
+#include "BulletManager.h"
 
 // プレイヤークラス
 class Player
 {
 	// 定数宣言 -----------------------------------------
 private:
+
+	// 最大移動速度
+	static constexpr float MOVE_SPEED_MAX = 4.0f;
 
 	// 移動時の加速度
 	static constexpr float MOVE_ACCELERATION = 0.1f;
@@ -36,7 +40,7 @@ public:
 	void Initialize();
 
 	// 更新処理
-	void Update(int keyCondition, int keyTrigger);
+	void Update(int keyCondition, int keyTrigger, BulletManager& bulletManager);
 
 	// 描画処理
 	void Render(int ghPlayer);

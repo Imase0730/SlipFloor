@@ -15,7 +15,7 @@ void Player::Initialize()
 	m_position = Vector2D{ Screen::GAME_WIDTH / 2.0f, Screen::GAME_HEIGHT / 2.0f };
 }
 
-void Player::Update(int keyCondition, int keyTrigger)
+void Player::Update(int keyCondition, int keyTrigger, BulletManager& bulletManager)
 {
 	// 左キーが押された
 	if (keyCondition & PAD_INPUT_LEFT)
@@ -48,6 +48,13 @@ void Player::Update(int keyCondition, int keyTrigger)
 	// 速度に加速度を足す
 	m_velocity += m_acceleration;
 
+	// 速度を抑制する
+	if (Length(m_velocity) > MOVE_SPEED_MAX)
+	{
+		// 速度を正規化（長さ１）して最大速度を掛ける
+		m_velocity = Normalize(m_velocity) * MOVE_SPEED_MAX;
+	}
+
 	// 位置に速度を足す
 	m_position += m_velocity;
 
@@ -59,6 +66,12 @@ void Player::Update(int keyCondition, int keyTrigger)
 	if (m_position.x > Screen::GAME_WIDTH) m_position.x = Screen::GAME_WIDTH;
 	if (m_position.y < 0.0f) m_position.y = 0.0f;
 	if (m_position.y > Screen::GAME_HEIGHT) m_position.y = Screen::GAME_HEIGHT;
+
+	// スペースキーで弾を発射する
+	if (keyTrigger & PAD_INPUT_10)
+	{
+		bulletManager.ShootBullet(m_position, m_angleRad);
+	}
 }
 
 void Player::Render(int ghPlayer)

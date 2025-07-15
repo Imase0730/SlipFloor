@@ -140,6 +140,7 @@
   <ItemGroup>
     <!-- プリコンパイル済みヘッダー -->
     <ClCompile Include="Game\GamePlayScene\Bullet.cpp" />
+    <ClCompile Include="Game\GamePlayScene\BulletManager.cpp" />
     <ClCompile Include="Game\GamePlayScene\GamePlayScene.cpp" />
     <ClCompile Include="Game\GamePlayScene\Player.cpp" />
     <ClCompile Include="pch.cpp">
@@ -147,6 +148,7 @@
     </ClCompile>
     <ClInclude Include="Game\GameMath.h" />
     <ClInclude Include="Game\GamePlayScene\Bullet.h" />
+    <ClInclude Include="Game\GamePlayScene\BulletManager.h" />
     <ClInclude Include="Game\GamePlayScene\GamePlayScene.h" />
     <ClInclude Include="Game\GamePlayScene\Player.h" />
     <ClInclude Include="pch.h" />

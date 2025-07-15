@@ -12,7 +12,7 @@ GamePlayScene::GamePlayScene(Game* pGame)
 	, m_ghPlayer{ -1 }
 	, m_ghBullet{ -1 }
 	, m_player{}
-	, m_bullet{}
+	, m_playerBulletManager{}
 {
 }
 
@@ -30,13 +30,20 @@ void GamePlayScene::Initialize()
 
 	// プレイヤーの初期化
 	m_player.Initialize();
+
+	// プレイヤーの弾のマネージャーの初期化
+	m_playerBulletManager.Initialize(10);
+
 }
 
 // 更新処理
 void GamePlayScene::Update(int keyCondition, int keyTrigger)
 {
 	// プレイヤーの更新
-	m_player.Update(keyCondition, keyTrigger);
+	m_player.Update(keyCondition, keyTrigger, m_playerBulletManager);
+
+	// プレイヤーの弾のマネージャーの更新
+	m_playerBulletManager.Update();
 }
 
 // 描画処理
@@ -45,8 +52,8 @@ void GamePlayScene::Render()
 	// プレイヤーの描画
 	m_player.Render(m_ghPlayer);
 
-	// 弾の描画
-	m_bullet.Render(m_ghBullet);
+	// プレイヤーの弾のマネージャーの描画
+	m_playerBulletManager.Render(m_ghBullet);
 
 	DrawFormatString(10, 30, GetColor(255, 255, 255), L"GamePlayシーン");
 }
