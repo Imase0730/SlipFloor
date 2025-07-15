@@ -87,6 +87,9 @@
     <ClCompile Include="Game\GamePlayScene\Player.cpp">
       <Filter>Game\GamePlayScene</Filter>
     </ClCompile>
+    <ClCompile Include="Game\GamePlayScene\Bullet.cpp">
+      <Filter>Game\GamePlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\GamePlayScene\GamePlayScene.h">
@@ -96,6 +99,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\GamePlayScene\Player.h">
+      <Filter>Game\GamePlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GamePlayScene\Bullet.h">
       <Filter>Game\GamePlayScene</Filter>
     </ClInclude>
   </ItemGroup>
