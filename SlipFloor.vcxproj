@@ -147,6 +147,7 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClInclude Include="Game\Collision.h" />
     <ClInclude Include="Game\GameMath.h" />
     <ClInclude Include="Game\GamePlayScene\Bullet.h" />
     <ClInclude Include="Game\GamePlayScene\BulletManager.h" />

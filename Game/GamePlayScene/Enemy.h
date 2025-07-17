@@ -16,6 +16,15 @@ private:
 	// 移動時の加速度
 	static constexpr float MOVE_ACCELERATION = 0.1f;
 
+	// プレイヤーに近づく距離
+	static constexpr float APPROACH_DISTANCE = 100.0f;
+
+	// 回転角度
+	static constexpr float TURN_ANGLE = 2.0f;
+
+	// 敵の視野角
+	static constexpr float VIEW_ANGLE = 30.0f;
+
 	// メンバ変数 ---------------------------------------
 private:
 

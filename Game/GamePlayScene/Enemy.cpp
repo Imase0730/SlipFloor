@@ -21,30 +21,39 @@ void Enemy::Initialize()
 
 void Enemy::Update(BulletManager& bulletManager)
 {
-	// ----- 外積をテストする ----- //
-
-	//Vector2D v1{ 1.0f, 0.0f };
-	//Vector2D v2{ 0.0f, 1.0f };
-
-	//float a = Cross(v1, v2);
-	//float b = Cross(v2, v1);
-
-	// ---------------------------- //
-
 	// 敵からプレイヤーへのベクトルを求める
 	Vector2D v1 = m_pPlayer->GetPosition() - m_position;
+
+	// 敵とプレイヤーの距離を求める
+	float distance = Length(v1);
+
+	// v1ベクトルを正規化する
+	v1 = Normalize(v1);
 
 	// 敵の向いている方向ベクトル
 	Vector2D v2{ cosf(-m_angleRad), sinf(-m_angleRad) };
 
+	// 敵とプレイヤーのなす角度を求める
+	float angle = abs(ToDegrees(acosf(Dot(v1, v2))));
+
 	// プレイヤーの方向へ向ける
 	if (Cross(v1, v2) > 0.0f)
 	{
-		m_angleRad += ToRadians(4.0f);
+		m_angleRad += ToRadians(TURN_ANGLE);
 	}
 	else
 	{
-		m_angleRad -= ToRadians(4.0f);
+		m_angleRad -= ToRadians(TURN_ANGLE);
+	}
+
+	m_acceleration = Vector2D{ 0.0f, 0.0f };
+	if ( (angle < VIEW_ANGLE)				// 視野に入っている
+	  && (distance > APPROACH_DISTANCE)		// 近づく距離なら
+	   )
+	{
+		// プレイヤーに近づく
+		Vector2D v{ cosf(-m_angleRad), sinf(-m_angleRad) };
+		m_acceleration = v * MOVE_ACCELERATION;
 	}
 
 	// 速度に加速度を足す

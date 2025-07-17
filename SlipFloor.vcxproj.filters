@@ -116,6 +116,9 @@
     <ClInclude Include="Game\GamePlayScene\Enemy.h">
       <Filter>Game\GamePlayScene</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Collision.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
