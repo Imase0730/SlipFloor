@@ -5,6 +5,7 @@
 #pragma once
 
 #include "Player.h"
+#include "Enemy.h"
 #include "BulletManager.h"
 
 // クラスの前方宣言
@@ -30,6 +31,9 @@ private:
 	// プレイヤーの絵のグラフィックハンドル
 	int m_ghPlayer;
 
+	// 敵の絵のグラフィックハンドル
+	int m_ghEnemy;
+
 	// 弾の絵のグラフィックハンドル
 	int m_ghBullet;
 
@@ -38,6 +42,12 @@ private:
 
 	// プレイヤーの弾のマネージャー
 	BulletManager m_playerBulletManager;
+
+	// 敵
+	Enemy m_enemy;
+
+	// 敵の弾のマネージャー
+	BulletManager m_enemyBulletManager;
 
 	// メンバ関数の宣言 -------------------------------------------------
 public:

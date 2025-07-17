@@ -11,8 +11,11 @@ Player::Player()
 
 void Player::Initialize()
 {
-	// プレイヤーの位置を初期化
-	m_position = Vector2D{ Screen::GAME_WIDTH / 2.0f, Screen::GAME_HEIGHT / 2.0f };
+	// 位置を初期化
+	m_position = Vector2D{ Screen::GAME_WIDTH / 2.0f, Screen::GAME_HEIGHT / 2.0f + 200.0f};
+
+	// 上に向ける
+	m_angleRad = ToRadians(90.0f);
 }
 
 void Player::Update(int keyCondition, int keyTrigger, BulletManager& bulletManager)

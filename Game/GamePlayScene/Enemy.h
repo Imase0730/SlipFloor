@@ -2,9 +2,10 @@
 
 #include "Game/GameMath.h"
 #include "BulletManager.h"
+#include "Player.h"
 
-// プレイヤークラス
-class Player
+// 敵クラス
+class Enemy
 {
 	// 定数宣言 -----------------------------------------
 private:
@@ -30,22 +31,22 @@ private:
 	// 加速度
 	Vector2D m_acceleration;
 
+	// プレイヤーへのポインタ
+	Player* m_pPlayer;
+
 	// メンバ関数 ---------------------------------------
 public:
 
 	// コンストラクタ
-	Player();
+	Enemy(Player* pPlayer);
 
 	// 初期化関数
 	void Initialize();
 
 	// 更新処理
-	void Update(int keyCondition, int keyTrigger, BulletManager& bulletManager);
+	void Update(BulletManager& bulletManager);
 
 	// 描画処理
-	void Render(int ghPlayer);
-
-	// 位置を取得する関数
-	Vector2D GetPosition() const { return m_position; }
+	void Render(int ghEnemy);
 
 };
