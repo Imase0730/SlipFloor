@@ -7,6 +7,7 @@ Enemy::Enemy(Player* pPlayer)
 	, m_velocity{ 0.0f, 0.0f }
 	, m_acceleration{ 0.0f, 0.0f }
 	, m_pPlayer{ pPlayer }
+	, m_shootDelayFrame{ 0 }
 {
 }
 
@@ -34,20 +35,20 @@ void Enemy::Update(BulletManager& bulletManager)
 	Vector2D v2{ cosf(-m_angleRad), sinf(-m_angleRad) };
 
 	// “G‚ÆƒvƒŒƒCƒ„[‚Ì‚È‚·Šp“x‚ð‹‚ß‚é
-	float angle = abs(ToDegrees(acosf(Dot(v1, v2))));
+	float angle = ToDegrees(acosf(Dot(v1, v2)));
 
 	// ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ÖŒü‚¯‚é
-	if (Cross(v1, v2) > 0.0f)
-	{
-		m_angleRad += ToRadians(TURN_ANGLE);
-	}
-	else
+	if (Cross(v2, v1) > 0.0f)
 	{
 		m_angleRad -= ToRadians(TURN_ANGLE);
 	}
+	else
+	{
+		m_angleRad += ToRadians(TURN_ANGLE);
+	}
 
 	m_acceleration = Vector2D{ 0.0f, 0.0f };
-	if ( (angle < VIEW_ANGLE)				// Ž‹–ì‚É“ü‚Á‚Ä‚¢‚é
+	if ( (angle < (VIEW_ANGLE / 2.0f))		// Ž‹–ì‚É“ü‚Á‚Ä‚¢‚é
 	  && (distance > APPROACH_DISTANCE)		// ‹ß‚Ã‚­‹——£‚È‚ç
 	   )
 	{
@@ -77,6 +78,18 @@ void Enemy::Update(BulletManager& bulletManager)
 	if (m_position.x > Screen::GAME_WIDTH) m_position.x = Screen::GAME_WIDTH;
 	if (m_position.y < 0.0f) m_position.y = 0.0f;
 	if (m_position.y > Screen::GAME_HEIGHT) m_position.y = Screen::GAME_HEIGHT;
+
+	// ’e‚ð”­ŽË‚·‚é
+	m_shootDelayFrame++;
+	if ( (m_shootDelayFrame > SHOOT_INTERVAL_FRAME)	// ˆê’è‚ÌŠÔŠu‚Å
+	  && (distance < SHOOT_DISTANCE)				// ‹ß‚Ã‚¢‚Ä
+	  && (angle < (SHOOT_VIEW_ANGLE / 2.0f))		// Ž‹–ìŠp‚É“ü‚Á‚½‚ç
+	   )
+	{
+		m_shootDelayFrame = 0;
+		bulletManager.ShootBullet(m_position, m_angleRad);
+	}
+
 }
 
 void Enemy::Render(int ghEnemy)

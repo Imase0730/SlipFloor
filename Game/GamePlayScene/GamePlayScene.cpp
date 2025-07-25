@@ -5,6 +5,7 @@
 #include "GamePlayScene.h"
 #include "Game/Game.h"
 #include "Game/Screen.h"
+#include "Game/Collision.h"
 
 // コンストラクタ
 GamePlayScene::GamePlayScene(Game* pGame)
@@ -60,6 +61,17 @@ void GamePlayScene::Update(int keyCondition, int keyTrigger)
 
 	// 敵の弾のマネージャーの更新
 	m_enemyBulletManager.Update();
+
+	// プレイヤーと敵の衝突判定
+	if (IsCircleColliding(m_player.GetBoundingCircle(), m_enemy.GetBoundingCircle()))
+	{
+		// 重ならないように位置を修正する
+		BoundingCircle player = m_player.GetBoundingCircle();
+		BoundingCircle enemy = m_enemy.GetBoundingCircle();
+		ResolveOverlap(&player, &enemy);
+		m_player.SetPosition(player.center);
+		m_enemy.SetPosition(enemy.center);
+	}
 }
 
 // 描画処理
